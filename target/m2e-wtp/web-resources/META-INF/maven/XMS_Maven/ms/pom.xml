@@ -1,0 +1,266 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>XMS_Maven</groupId>
+  <artifactId>ms</artifactId>
+  <packaging>war</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>ms Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  
+<build>
+  	<!-- 重点！！！需要特别注意jdk1.8需要至少tomcat7以上才支持，且在Maven下运行需要使用命令：tomcat7:run运行 -->
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-compiler-plugin</artifactId>
+  			<version>3.0</version>
+  			<configuration>
+  				<source>1.8</source>
+  				<target>1.8</target>
+  			</configuration>
+  		</plugin>
+  		<!-- 可以通过这种方式配置Tomcat  -->
+  		<plugin>
+  			<groupId>org.apache.tomcat.maven</groupId>
+  			<artifactId>tomcat7-maven-plugin</artifactId>
+  			<version>2.2</version>
+  		</plugin>
+  	</plugins>
+  	
+  	<!-- 重点！！！在Maven中，这里需要加上这句话，不然会出现invalid bound statement (not found)错误，也就是mapper文件扫描不到！！！ -->
+   	<resources>
+            <resource>
+                <directory>src/main/java</directory>
+         <!--        此配置不可缺，否则mybatis的Mapper.xml将会丢失 TeacherMapper.xml -->
+                <includes>
+                	<include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+         <!--    指定资源的位置 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>  
+                    <include>**/*.properties</include>  
+                    <include>**/*.xml</include>  
+                </includes>
+            </resource>
+        </resources> 
+  </build>
+  
+  <!-- 版本锁定 -->
+  <properties>
+  	<spring.version>4.2.4.RELEASE</spring.version>
+  	<!-- <mybatis.version>3.2.8</mybatis.version> -->
+  	 <mybatis.version>3.4.6</mybatis.version>
+  </properties>
+  
+  <dependencies>
+  	<!-- jstl标签库，需要在JSP页面中使用 -->
+  	<dependency>
+		<groupId>jstl</groupId>
+		<artifactId>jstl</artifactId>
+		<version>1.2</version>
+	</dependency> 
+	
+<!-- 	报错
+		"c:forEach" (org.apache.taglibs.standard.tag.rt.core.ForEachTag) 
+		was not found on the Java Build Path,jstl版本低？ -->		
+	
+<!-- 	<dependency>
+		<groupId>taglibs</groupId>
+		<artifactId>standard</artifactId>
+		<version>1.1.2</version>
+	</dependency>  -->
+	
+	<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+	
+<!-- 	
+ <dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
+	 -->
+	
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>servlet-api</artifactId>
+	    <version>2.5</version>
+	    <scope>provided</scope>
+	</dependency>
+	
+  	<!-- spring,springmvc配置开始 -->
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-web</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-test</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-context</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-beans</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-jdbc</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-webmvc</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-aspects</artifactId>
+  		<version>${spring.version}</version>
+  	</dependency>
+  	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-tx</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-core</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
+  	<!-- spring,springmvc配置结束 -->
+  	
+  	<!-- mybatis配置开始 -->
+  	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis-spring</artifactId>
+		<version>1.3.2</version>
+	</dependency>
+  	<dependency>
+  		<groupId>org.mybatis</groupId>
+  		<artifactId>mybatis</artifactId>
+  		<version>${mybatis.version}</version>
+  	</dependency>
+  	<!-- mybatis配置结束 -->
+  	
+  	<!-- 数据库配置开始 -->
+  	<!-- mysql数据库配置开始 -->
+ <!--  	<dependency>
+  		<groupId>mysql</groupId>
+  		<artifactId>mysql-connector-java</artifactId>
+  		<version>5.1.40</version>
+  	</dependency> -->
+	  	
+	  	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>8.0.12</version>
+	</dependency>
+	  	
+  	
+  	<!-- mysql数据库配置开始 -->
+  	<!-- 配置c3p0开始 -->  	
+<!-- 	<dependency>
+		<groupId>c3p0</groupId>
+		<artifactId>c3p0</artifactId>
+		<version>0.9.1.2</version>
+	</dependency> -->
+	
+	<!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
+	<dependency>
+	    <groupId>com.mchange</groupId>
+	    <artifactId>c3p0</artifactId>
+	    <version>0.9.5.2</version>
+	</dependency>
+	
+	
+	<!-- 配置c3p0结束 -->
+	<!-- 数据库配置结束-->
+	
+	<!-- logback 日志配置开始 -->
+<!-- 	<dependency>
+		<groupId>ch.qos.logback</groupId>
+		<artifactId>logback-core</artifactId>
+		<version>1.1.7</version>
+	</dependency>
+	<dependency>
+		<groupId>ch.qos.logback</groupId>
+		<artifactId>logback-classic</artifactId>
+		<version>1.1.7</version>
+	</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+		<version>1.7.12</version>
+	</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-log4j12</artifactId>
+		<version>1.6.4</version>
+	</dependency> -->
+	<!-- logback 日志配置结束 -->
+	
+	
+	
+	
+	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>2.9.6</version>
+	</dependency>
+	
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-core</artifactId>
+	    <version>2.9.6</version>
+	</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-annotations</artifactId>
+	    <version>2.9.6</version>
+	</dependency>
+	
+				
+<!-- 	通过CommonMutipartResolver 解析mutipart 请求		 -->
+	<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+	<dependency>
+	    <groupId>commons-fileupload</groupId>
+	    <artifactId>commons-fileupload</artifactId>
+	    <version>1.3.3</version>
+	</dependency>
+		
+		
+		<!-- Json2Map用到的jar -->
+		<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
+	 <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
+     </dependency>
+		
+		
+	
+  </dependencies>
+  
+  
+</project>

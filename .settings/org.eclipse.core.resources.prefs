@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/xms/controller/LoginController.java=UTF-8
+encoding//src/main/java/com/xms/controller/MainController.java=UTF-8
+encoding//src/main/java/com/xms/controller/MainControllerWx.java=UTF-8
+encoding//src/main/java/com/xms/controller/ProductController.java=UTF-8
+encoding//src/main/java/com/xms/service/MainService.java=UTF-8
+encoding//src/main/java/com/xms/servlet/InitServlet.java=UTF-8
+encoding//src/main/java/com/xms/thread/AccessTokenThread.java=UTF-8
+encoding//src/main/java/com/xms/util/AccessTokenUtil.java=UTF-8
+encoding//src/main/java/com/xms/util/Json2Map.java=UTF-8
+encoding//src/main/java/com/xms/util/SpringContextUtil.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/upload.jsp=UTF-8
