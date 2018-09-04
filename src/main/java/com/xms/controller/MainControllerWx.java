@@ -56,9 +56,15 @@ public class MainControllerWx {
 	
 	@RequestMapping("/toCourseJson")
 	@ResponseBody
-	public Map<String,Object> toCourseJson(
+	public Map<String,Object> toCourseJson(		
 		@ModelAttribute("courseDirectionId") int courseDirectionId,
-			@ModelAttribute("courseContentId") int courseContentId,Model model){		
+			@ModelAttribute("courseContentId") int courseContentId,Model model){	
+		try {
+			Thread.sleep(1000);//模拟网络延迟
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//譟･隸｢蜈ｨ驛ｨ隸ｾ遞区婿蜷�
 		List<CourseDirection> courseDirections 
 			= mainService.findAllCourseDirection();		

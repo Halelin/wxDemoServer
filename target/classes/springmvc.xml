@@ -28,8 +28,7 @@
 		<mvc:resources mapping="/images/**" location="/images/" /> 
 			<mvc:resources mapping="/js/**" location="/js/" /> 
 				<mvc:resources mapping="/video/**" location="/video/" />  -->
-
-
+				
 	
 	<!-- 开启注解 -->
 	<mvc:annotation-driven />
