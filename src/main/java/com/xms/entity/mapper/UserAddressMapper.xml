@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.xms.dao.UserAddressDao">	
+	<!-- 保存 -->
+	<insert id="save"
+		parameterType="com.xms.entity.UserAddress">
+		insert into userAddress values(null,#{openId},#{isDefault},#{name},#{phoneNum},#{address},#{mailCode},#{province},#{city},#{district},now(),now())
+	</insert>
+
+	<!-- 查询 单个address-->
+	<select id="selectAddressByAddressId" parameterType="java.lang.Integer" resultType="com.xms.entity.UserAddress">
+		select * from userAddress where id=#{id}
+	</select>
+	<!-- 查询单个用户的所有address -->
+	<select id="selectAddressByOpenId" parameterType="java.lang.String" resultType="com.xms.entity.UserAddress" >
+		select * from userAddress where openId=#{openid}
+	</select>
+	<!-- 更新用户地址 -->
+	<update id="update" parameterType="com.xms.entity.UserAddress">
+		update userAddress set name = #{name},phoneNum =#{phoneNum},address=#{address},mailCode=#{mailCode},province=#{province},city=#{city},district=#{district},editTime=now() where id =#{id}
+	</update>
+</mapper> 
