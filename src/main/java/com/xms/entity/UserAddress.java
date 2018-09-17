@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 public class UserAddress {
-	private int id;
+	private Integer id;
 	private String openId;
 	private boolean isDefault;
 	private String name;

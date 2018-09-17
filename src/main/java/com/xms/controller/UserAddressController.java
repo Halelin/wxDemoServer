@@ -19,15 +19,15 @@ public class UserAddressController {
 	UserAddressDao ad;
 	@RequestMapping("/save")
 	public void save(UserAddress useraddress){
-//		System.out.println("address"+useraddress.getAddress());
-//		System.out.println("city"+useraddress.getCity());
-//		System.out.println("district"+useraddress.getDistrict());
-//		System.out.println("id"+useraddress.getId());
-//		System.out.println("mailcode"+useraddress.getMailCode());
-//		System.out.println("name"+useraddress.getName());
-//		System.out.println("openid"+useraddress.getOpenId());
-//		System.out.println("phone"+useraddress.getPhoneNum());
-//		System.out.println("provice"+useraddress.getProvince());		
+		System.out.println("address"+useraddress.getAddress());
+		System.out.println("city"+useraddress.getCity());
+		System.out.println("district"+useraddress.getDistrict());
+		System.out.println("id"+useraddress.getId());
+		System.out.println("mailcode"+useraddress.getMailCode());
+		System.out.println("name"+useraddress.getName());
+		System.out.println("openid"+useraddress.getOpenId());
+		System.out.println("phone"+useraddress.getPhoneNum());
+		System.out.println("provice"+useraddress.getProvince());		
 		ad.save(useraddress);
 	}
 	
@@ -53,5 +53,9 @@ public class UserAddressController {
 		System.out.println("phone"+useraddress.getPhoneNum());
 		System.out.println("provice"+useraddress.getProvince());
 		ad.update(useraddress);
+	}
+	@RequestMapping("/deleteAddressById")
+	public void deleteAddressById(Integer id){
+		ad.deleteAddressById(id);
 	}
 }

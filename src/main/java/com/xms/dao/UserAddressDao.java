@@ -11,4 +11,6 @@ public interface UserAddressDao {
 	UserAddress selectAddressByAddressId(Integer id);
 	List<UserAddress> selectAddressByOpenId(String openId);
 	void update(UserAddress useraddress);
+	void deleteAddressById(Integer id);
+
 }
